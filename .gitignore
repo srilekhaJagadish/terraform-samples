@@ -1,2 +1,7 @@
 */.idea
 *.idea
+
+*/*.lock.hcl
+*/*.lock.info
+*/*.tfstate
+*/*.terraform
