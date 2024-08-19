@@ -11,7 +11,6 @@ pipeline {
                 cd aws-resources
                 pwd
                 ls
-                //set +x
                 aws_credentials=$(aws sts assume-role --role-arn arn:aws:iam::533267077438:role/deployer-role --role-session-name "RoleSession1" --output json)
 
                 export AWS_ACCESS_KEY_ID=$(echo $aws_credentials|jq '.Credentials.AccessKeyId'|tr -d '"')
@@ -22,12 +21,6 @@ pipeline {
                 echo 'terraform plan ....'
                 terraform plan -out=webServerTfplan.tfplan
                 ls
-                chmod 777 webServerTfplan.tfplan
-                cat webServerTfplan.tfplan
-                // echo 'terraform show ....'
-                // terraform show webServerTfplan.tfplan
-                // echo 'terraform apply ....'
-                // terraform apply webServerTfplan.tfplan
                 '''
             }
         }
