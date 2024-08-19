@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     stages {
-        stage('Deploy') {
+        stage('terraform init') {
             options {
-                timeout(time: 10, unit: 'MINUTES')
+                timeout(time: 5, unit: 'MINUTES')
             }
             steps {
                 sh '''
@@ -14,8 +14,9 @@ pipeline {
                 echo 'terraform init ....'
                 terraform init 
                 echo 'terraform plan ....'
-                terraform plan
+                sudo terraform plan -out=webServerTfplan.tfplan
                 ls
+                sudo terraform apply "webServerTfplan.tfplan"
                 '''
             }
         }
