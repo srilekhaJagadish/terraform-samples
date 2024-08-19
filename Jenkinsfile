@@ -14,14 +14,17 @@ pipeline {
                 export AWS_ACCESS_KEY_ID=$(echo $aws_credentials|jq '.Credentials.AccessKeyId'|tr -d '"')
                 export AWS_SECRET_ACCESS_KEY=$(echo $aws_credentials|jq '.Credentials.SecretAccessKey'|tr -d '"')
                 export AWS_SESSION_TOKEN=$(echo $aws_credentials|jq '.Credentials.SessionToken'|tr -d '"')
-                echo 'terraform init ....'
-                terraform init 
+                // echo 'terraform init ....'
+                // terraform init 
                 echo 'terraform plan ....'
                 terraform plan -out=webServerTfplan.tfplan
-                echo 'terraform show ....'
-                terraform show webServerTfplan.tfplan
-                echo 'terraform apply ....'
-                terraform apply webServerTfplan.tfplan
+                ls
+                chmod 777 webServerTfplan.tfplan
+                cat webServerTfplan.tfplan
+                // echo 'terraform show ....'
+                // terraform show webServerTfplan.tfplan
+                // echo 'terraform apply ....'
+                // terraform apply webServerTfplan.tfplan
                 '''
             }
         }
