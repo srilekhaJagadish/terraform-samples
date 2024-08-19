@@ -1,8 +1,9 @@
-provider "aws" {
-  region = "eu-west-1"
-  assume_role {
-    role_arn = "arn:aws:iam::533267077438:role/deployer-role"
-    session_name = "terraform"
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.19.0"
+    }
   }
 }
 
