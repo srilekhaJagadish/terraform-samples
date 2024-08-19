@@ -3,6 +3,9 @@ pipeline {
 
     stages {
         stage('Deploy') {
+            options {
+                timeout(time: 10, unit: 'MINUTES')
+            }
             steps {
                 sh '''
                 cd aws-resources
