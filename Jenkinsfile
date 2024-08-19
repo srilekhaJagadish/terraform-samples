@@ -11,12 +11,7 @@ pipeline {
                 cd aws-resources
                 pwd
                 ls
-                echo 'terraform init ....'
-                terraform init 
-                echo 'terraform plan ....'
-                terraform plan -out=webServerTfplan.tfplan -lock=false
-                ls
-                terraform apply "webServerTfplan.tfplan"
+                whoami
                 '''
             }
         }
