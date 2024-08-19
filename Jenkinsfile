@@ -19,7 +19,7 @@ pipeline {
                 echo 'terraform init ....'
                 terraform init 
                 echo 'terraform plan ....'
-                terraform plan -out=webServerTfplan.tfplan
+                terraform plan
                 ls
                 '''
             }
