@@ -11,7 +11,7 @@ pipeline {
                 cd aws-resources
                 pwd
                 ls
-                set +x
+                //set +x
                 aws_credentials=$(aws sts assume-role --role-arn arn:aws:iam::533267077438:role/deployer-role --role-session-name "RoleSession1" --output json)
 
                 export AWS_ACCESS_KEY_ID=$(echo $aws_credentials|jq '.Credentials.AccessKeyId'|tr -d '"')
