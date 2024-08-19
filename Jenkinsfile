@@ -17,7 +17,7 @@ pipeline {
                 echo 'terraform init ....'
                 terraform init 
                 echo 'terraform plan ....'
-                terraform plan terraform plan -out=webServerTfplan.tfplan
+                terraform plan -out=webServerTfplan.tfplan
                 echo 'terraform show ....'
                 terraform show webServerTfplan.tfplan
                 echo 'terraform apply ....'
