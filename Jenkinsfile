@@ -12,6 +12,12 @@ pipeline {
                 pwd
                 ls
                 whoami
+                echo 'terraform init ....'
+                terraform init 
+                echo 'terraform plan ....'
+                terraform plan -lock=false -out webServer.tfplan
+                ls
+                terraform apply "webServer.tfplan
                 '''
             }
         }
