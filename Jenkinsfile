@@ -15,8 +15,9 @@ pipeline {
                 export AWS_SECRET_ACCESS_KEY=$(echo $aws_credentials|jq '.Credentials.SecretAccessKey'|tr -d '"')
                 export AWS_SESSION_TOKEN=$(echo $aws_credentials|jq '.Credentials.SessionToken'|tr -d '"')
                 terraform init 
-                terraform plan 
-                terraform apply -auto-approve
+                terraform plan terraform plan --out=web-server-plan-file
+                terraform show web-server-plan-file
+                terraform apply web-server-plan-file
                 '''
             }
         }
