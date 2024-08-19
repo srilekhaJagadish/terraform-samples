@@ -17,11 +17,11 @@ pipeline {
                 echo 'terraform init ....'
                 terraform init 
                 echo 'terraform plan ....'
-                terraform plan terraform plan --out=webServerTfplan
+                terraform plan terraform plan -out=webServerTfplan.tfplan
                 echo 'terraform show ....'
-                terraform show webServerTfplan
+                terraform show webServerTfplan.tfplan
                 echo 'terraform apply ....'
-                terraform apply webServerTfplan
+                terraform apply webServerTfplan.tfplan
                 '''
             }
         }
