@@ -14,9 +14,9 @@ pipeline {
                 echo 'terraform init ....'
                 terraform init 
                 echo 'terraform plan ....'
-                sudo terraform plan -out=webServerTfplan.tfplan
+                terraform plan -out=webServerTfplan.tfplan -lock=false
                 ls
-                sudo terraform apply "webServerTfplan.tfplan"
+                terraform apply "webServerTfplan.tfplan"
                 '''
             }
         }
