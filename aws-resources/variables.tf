@@ -35,5 +35,5 @@ variable "instance_type" {
 }
 
 variable "instance_key" {
- default = "MyKeyPair"
+ default = "web-server-key-pair"
 }
