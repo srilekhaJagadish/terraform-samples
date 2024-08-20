@@ -8,7 +8,7 @@ pipeline {
             }
             steps {
                 sh '''
-                cd aws_resources
+                cd aws-resources
                 echo 'terraform init ....'
                 terraform init 
                 '''
@@ -17,7 +17,7 @@ pipeline {
         stage('terraform plan') {
             steps {
                 sh '''
-                cd aws_resources
+                cd aws-resources
                 echo 'terraform plan ....'
                 terraform plan -out webServer.tfplan
                 ls
@@ -29,7 +29,7 @@ pipeline {
             steps {
                 unstash 'tfPlanFile'
                 sh '''
-                cd aws_resources
+                cd aws-resources
                 echo 'terraform apply ....'
                 terraform apply "webServer.tfplan"
                 '''
