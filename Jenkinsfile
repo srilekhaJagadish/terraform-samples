@@ -8,13 +8,13 @@ pipeline {
             }
             steps {
                 sh '''
-                cd aws-resources
+                cd aws_resources
                 echo 'terraform init ....'
                 terraform init 
                 '''
             }
         }
-        stage('terraform plan'){
+        stage('terraform plan') {
             steps {
                 sh '''
                 cd aws_resources
@@ -22,12 +22,12 @@ pipeline {
                 terraform plan -out webServer.tfplan
                 ls
                 '''
-                 stash includes: '*/*.tfplan', name: 'planfile' 
-            }
+                stash includes: '*/*.tfplan', name: 'tfPlanFile'
+            }   
         }
         stage('terraform apply'){
             steps {
-                unstash 'planfile'
+                unstash 'tfPlanFile'
                 sh '''
                 cd aws_resources
                 echo 'terraform apply ....'
