@@ -17,7 +17,7 @@ pipeline {
                 echo 'terraform plan ....'
                 sudo terraform plan -out webServer.tfplan
                 ls
-                sudo terraform apply "webServer.tfplan
+                sudo terraform apply "webServer.tfplan"
                 '''
             }
         }
