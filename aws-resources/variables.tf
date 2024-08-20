@@ -7,7 +7,7 @@ variable "aws_region" {
 variable "aws_azs" {
  type = string
  description = "AWS Availability Zones"
- default = "us-east-1a"
+ default = "eu-west-1a"
 }
 
 variable "enable_dns_hostnames" {
