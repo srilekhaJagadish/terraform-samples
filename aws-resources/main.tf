@@ -81,8 +81,8 @@ resource "aws_instance" "web" {
  ami = data.aws_ami.amazon-linux-2.id
  instance_type = var.instance_type
  key_name = var.instance_key
- subnet_id = var.subnet_id
- security_groups = var.security_groups
+ subnet_id = aws_subnet.public_subnet.id
+ security_groups = aws_security_group.sg
 user_data = <<-EOF
  #!/bin/bash
  yum update -y
