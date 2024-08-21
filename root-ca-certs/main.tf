@@ -5,7 +5,7 @@ resource "tls_private_key" "cm_ca_private_key" {
 
 resource "local_file" "cm_ca_key" {
   content  = tls_private_key.cm_ca_private_key.private_key_pem
-  filename = "${path.module}/certs/cloudmanthanCA.key"
+  filename = "${path.module}/certs/webserverCA.key"
 }
 
 
@@ -15,12 +15,12 @@ resource "tls_self_signed_cert" "cm_ca_cert" {
   is_ca_certificate = true
 
   subject {
-    country             = "IN"
-    province            = "Mahrashatra"
-    locality            = "Mumbai"
-    common_name         = "Cloud Manthan Root CA"
-    organization        = "Cloud Manthan Software Solutions Pvt Ltd."
-    organizational_unit = "Cloud Manthan Root Certification Auhtority"
+    country             = "EU"
+    province            = "France"
+    locality            = "Paris"
+    common_name         = "Web Server Root CA"
+    organization        = "My Web Server Software Solutions Pvt Ltd."
+    organizational_unit = "My Web Server Root Certification Auhtority"
   }
 
   validity_period_hours = 43800 //  1825 days or 5 years
@@ -34,7 +34,7 @@ resource "tls_self_signed_cert" "cm_ca_cert" {
 
 resource "local_file" "cm_ca_cert" {
   content  = tls_self_signed_cert.cm_ca_cert.cert_pem
-  filename = "${path.module}/certs/cloudmanthanCA.cert"
+  filename = "${path.module}/certs/webserver.cert"
 }
 
 # Create private key for server certificate 
@@ -44,7 +44,7 @@ resource "tls_private_key" "cm_internal" {
 
 resource "local_file" "cm_internal_key" {
   content  = tls_private_key.cm_internal.private_key_pem
-  filename = "${path.module}/certs/dev.cloudmanthan.key"
+  filename = "${path.module}/certs/dev.webserver.key"
 }
 
 
@@ -53,19 +53,19 @@ resource "tls_cert_request" "cm_internal_csr" {
 
   private_key_pem = tls_private_key.cm_internal.private_key_pem
 
-  dns_names = ["dev.cloudmanthan.internal"]
+  dns_names = ["dev.webserver.internal"]
 
   subject {
-    country             = "IN"
-    province            = "Mahrashatra"
-    locality            = "Mumbai"
-    common_name         = "Cloud Manthan Internal Development "
-    organization        = "Cloud Manthan"
+    country             = "EU"
+    province            = "France"
+    locality            = "Paris"
+    common_name         = "Web Server Internal Development "
+    organization        = "Technologies Pvt Ltd"
     organizational_unit = "Development"
   }
 }
 
-# Sign Seerver Certificate by Private CA 
+# Sign Server Certificate by Private CA 
 resource "tls_locally_signed_cert" "cm_internal" {
   // CSR by the development servers
   cert_request_pem = tls_cert_request.cm_internal_csr.cert_request_pem
@@ -86,5 +86,5 @@ resource "tls_locally_signed_cert" "cm_internal" {
 
 resource "local_file" "cm_internal_cert" {
   content  = tls_locally_signed_cert.cm_internal.cert_pem
-  filename = "${path.module}/certs/dev.cloudmanthan.cert"
+  filename = "${path.module}/certs/dev.webserver.cert"
 }
